@@ -9,7 +9,7 @@ for i,name in enumerate(names):
   for c in name:
     tmp += (ord(c)-ord('A')+1)
 
-  ans+=tmp*i
+  ans+=tmp*(i+1)
 
 
 print(ans)
