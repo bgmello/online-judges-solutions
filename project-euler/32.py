@@ -12,13 +12,12 @@ def join_ints(l):
     return ans
 
 
-ans = 0
+ans = set()
 
 for perm in perms:
     for posx in range(8):
         for poseq in range(posx+1, 8):
             if (join_ints(perm[:posx+1])*join_ints(perm[posx+1:poseq+1])==join_ints(perm[poseq+1:])):
-                ans+=join_ints(perm[poseq+1:])
+                ans.add(join_ints(perm[poseq+1:]))
 
-
-print(ans/2)
+print(sum(ans))
