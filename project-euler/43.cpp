@@ -1,5 +1,5 @@
 #include<bits/stdc++.h>
-#define pii pair<int,int>
+#define pii pair<ll,ll>
 #define F first
 #define S second
 #define pb push_back
@@ -7,29 +7,26 @@
 using namespace std;
 
 typedef long long ll;
-const int N=1e5+5;
+const ll N=1e5+5;
 
-vector<int> sliceVec(vector<int> v, int pos, int size)
+vector<ll> sliceVec(vector<ll> v, ll pos, ll size)
 {
-  vector<int> ans(size);
-  for(int i=pos;i<pos+size;i++)ans[i-pos]=v[i];
-
-  return ans;
+  return {v.begin()+pos, v.begin()+pos+size};
 }
 
-ll joinNum(vector<int> v){
-  vector<int>::reverse_iterator rit;
+ll joinNum(vector<ll> v){
 
-  int exp = 1;
-  ll ans = 0;
-  for(rit=v.rbegin();rit!=v.rend();rit++){
-    ans+=(*rit)*exp;
+  reverse(v.begin(), v.end());
+  ll exp = 1;
+  auto getDigit = [&exp](ll acc, ll x){
+    ll ans = exp*x+acc;
     exp*=10;
-  }
-  return ans;
+    return ans;
+  };
+  return accumulate(v.begin(), v.end(), ll(0), getDigit);
 }
 
-bool hasProperty(vector<int> v)
+bool hasProperty(vector<ll> v)
 {
   bool ans = true;
   ans = ans and joinNum(sliceVec(v, 1, 3))%2==0;
@@ -44,7 +41,7 @@ bool hasProperty(vector<int> v)
 
 int main(){
 
-  vector<int> v = {0,1,2,3,4,5,6,7,8,9};
+  vector<ll> v = {0,1,2,3,4,5,6,7,8,9};
   ll ans = 0;
   do{
 
